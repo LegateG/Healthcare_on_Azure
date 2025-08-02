@@ -1,0 +1,44 @@
+{
+    "name": "IngestHospitalReadmissionData",
+    "properties": {
+        "activities": [
+            {
+                "name": "CopyFromURLToADLS",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "HttpSource"
+                    },
+                    "sink": {
+                        "type": "AzureBlobFSsink",
+                        "copyBehavior": "PreserveHierarchy"
+                    },
+                    "enableStaging": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "HospitalReadmissionHttpDataset",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "HospitalReadmissionADLSDataset",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2023-01-01T00:00:00Z"
+    }
+}
